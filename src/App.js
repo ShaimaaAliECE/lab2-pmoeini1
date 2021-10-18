@@ -15,6 +15,25 @@ function Slat(props){
       </div>
  }
 
+// check if all 4 components are the same
+function checkLine(a,b,c,d) {
+  return ((a !== null) && (a === b) && (a === c) && (a === d));
+}
+
+// check winner by iterating through state of board
+function checkWinner(bs) {
+console.log(bs);
+  for (let c = 0; c < 7; c++)
+      for (let r = 0; r < 4; r++)
+          if (checkLine(bs[c][r], bs[c][r+1], bs[c][r+2], bs[c][r+3]))
+              return bs[c][r] + ' wins!'
+  for (let r = 0; r < 6; r++)
+       for (let c = 0; c < 4; c++)
+           if (checkLine(bs[c][r], bs[c+1][r], bs[c+2][r], bs[c+3][r]))
+               return bs[c][r] + ' wins!'
+  return "";
+}
+
 class Grid extends Component {
   // constructor
   constructor() {
@@ -129,25 +148,6 @@ class App extends Component {
       </div>
     );
   }
-}
-
-// check if all 4 components are the same
-function checkLine(a,b,c,d) {
-    return ((a !== null) && (a === b) && (a === c) && (a === d));
-}
-
-// check winner by iterating through state of board
-function checkWinner(bs) {
-  console.log(bs);
-    for (let c = 0; c < 7; c++)
-        for (let r = 0; r < 4; r++)
-            if (checkLine(bs[c][r], bs[c][r+1], bs[c][r+2], bs[c][r+3]))
-                return bs[c][r] + ' wins!'
-    for (let r = 0; r < 6; r++)
-         for (let c = 0; c < 4; c++)
-             if (checkLine(bs[c][r], bs[c+1][r], bs[c+2][r], bs[c+3][r]))
-                 return bs[c][r] + ' wins!'
-    return "";
 }
 
 export default App;
